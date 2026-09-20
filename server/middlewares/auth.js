@@ -51,7 +51,7 @@ exports.isEmployee = async (req, res, next) => {
     }
 }
 
-exports.isEpmloyeer = async (req, res, next) => {
+exports.isEmployer = async (req, res, next) => {
     try{
         if(req.user.role != "Employer") {
             return res.status(401).json({
