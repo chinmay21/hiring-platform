@@ -79,3 +79,42 @@ exports.updateJob = async (req, res) => {
         });
     }
 }
+
+exports.deleteJob = async (req, res) => {
+    try{
+        const userId = req.user.id;
+        const jobId = req.params.id;
+
+        const job = await Job.findById(jobId);
+        
+        
+        if(!job) {
+            return res.status(401).json({
+                success:false,
+                message:"No such job exists"
+            });
+        }
+
+        if(job.createdBy.toString() !== userId) {
+            return res.status(401).json({
+                success:false,
+                message:"You are not authorized to delete this job"
+            });
+        }
+
+        await Job.findOneAndDelete(jobId);
+        await User.findByIdAndUpdate(userId, {$pull: { createdJobs: jobId } }, { new: true });
+
+        return res.status(200).json({
+            success:true,
+            message:"Job deleted successfully"
+        });
+
+    }
+    catch(error) {
+        return res.status(500).json({
+            success:false,
+            message:"Error occured while deleting the job"
+        });
+    }
+}
