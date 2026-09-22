@@ -118,3 +118,28 @@ exports.deleteJob = async (req, res) => {
         });
     }
 }
+
+exports.getAllJobs = async (req, res) => {
+    try{
+        const userId = req.user.id;
+        if(!userId) {
+            return res.status(401).json({
+                success:false,
+                message:"Invalid user ID!"
+            });
+        }
+
+        const jobs = await Job.find({});
+        return res.status(200).json({
+            success:true,
+            message:"All jobs fetched successfully",
+            data:jobs
+        });
+    }
+    catch(error) {
+        return res.status(500).json({
+            success:false,
+            message:"Error occured while getting all jobs"
+        });
+    }
+}
