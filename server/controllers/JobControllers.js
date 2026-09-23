@@ -143,3 +143,71 @@ exports.getAllJobs = async (req, res) => {
         });
     }
 }
+
+exports.applyForJob = async(req, res) => {
+    try{
+        const userId = req.user.id;
+        const jobId = req.params.id;
+
+        const job = await Job.findById(jobId);
+        if(!job) {
+            return res.status(401).json({
+                success:false,
+                message:"This job does not exist!"
+            });
+        }
+
+        const alreadyApplied = job.applicants.includes(userId);
+        if(alreadyApplied) {
+           return res.status(401).json({
+            success:false,
+            message:"You have already applied for this job"
+           });
+        }
+
+        const updatedJob = await Job.findByIdAndUpdate(jobId, { $push: { applicants: userId } }, { returnDocument: "after" });
+        const populatedJob = await updatedJob.populate("applicants", "name").exec();
+
+        await User.findByIdAndUpdate(userId, { $push: { appliedJobs: jobId } }, { returnDocument: "after" });
+
+        return res.status(200).json({
+            success:true,
+            message:"Applied for job successfully",
+            data: populatedJob,
+        })
+
+    }
+    catch(error) {
+        return res.status(500).json({
+            success:false,
+            message:"Error occured while applying for job!"
+        });
+    }
+}
+
+exports.getAllAppliedJobs = async (req, res) => {
+    try{
+        const userId = req.user.id;
+        const user = await User.findById(userId);
+        if(!user) {
+            return res.status(401).json({
+                success:false,
+                message:"User does not exist!"
+            });
+        }
+
+        const appliedJobs = user.appliedJobs;
+
+        return res.status(200).json({
+            success:false,
+            message:"Fetched applied jobs successfully",
+            data: appliedJobs
+        });
+    }
+    catch(error) {
+        return res.status(500).json({
+            success:false,
+            message:"Error occured while get applied jobs"
+        });
+    }
+}
