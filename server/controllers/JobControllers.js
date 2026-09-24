@@ -166,7 +166,7 @@ exports.applyForJob = async(req, res) => {
         }
 
         const updatedJob = await Job.findByIdAndUpdate(jobId, { $push: { applicants: userId } }, { returnDocument: "after" });
-        const populatedJob = await updatedJob.populate("applicants", "name").exec();
+        const populatedJob = await updatedJob.populate("applicants", "name");
 
         await User.findByIdAndUpdate(userId, { $push: { appliedJobs: jobId } }, { returnDocument: "after" });
 
@@ -199,7 +199,7 @@ exports.getAllAppliedJobs = async (req, res) => {
         const appliedJobs = user.appliedJobs;
 
         return res.status(200).json({
-            success:false,
+            success:true,
             message:"Fetched applied jobs successfully",
             data: appliedJobs
         });
