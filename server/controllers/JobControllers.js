@@ -211,3 +211,45 @@ exports.getAllAppliedJobs = async (req, res) => {
         });
     }
 }
+
+exports.getAllApplicants = async(req, res) => {
+    try{
+        const userId = req.user.id;
+        const jobId = req.params.id;
+
+        if(!userId) {
+            return res.status(401).json({
+                success:false,
+                message:"Unable to find user"
+            });
+        }
+
+        const job = await Job.findById(jobId);
+
+        if(!job) {
+            return res.status(401).json({
+                success:false,
+                message:"Unable to find job"
+            });
+        }
+
+        const applicants = job.applicants;
+        
+        if(job.applicants.length === 0) {
+            applicants = "There are no applicants" 
+        }
+
+        return res.status(200).json({
+            success:true,
+            message:"All applicants fetched successfully",
+            data:applicants
+        });
+
+    }
+    catch(error) {
+        return res.status(500).json({
+            success:false,
+            message:"Error occured while fetching all applicants"
+        });
+    }
+}
