@@ -49,7 +49,7 @@ const Home = () => {
             <p className='font-rose font-bold text-5xl w-fit mx-auto'>How HireLens Works</p>
             <p className='font-rose font-bold text-3xl mt-15 w-fit mx-auto'>From resume to relevant opportunity, HireLens keeps the process simple.</p>
 
-            <ul className='list-disc px-10 font-rose text-2xl py-15 font-semibold'>
+            <ul className='list-disc px-10 font-rose text-2xl space-y-5 py-15 font-semibold'>
               <li className='space-y-5'>
                 <p className='text-3xl'>Upload Your Resume</p>
                 <p>Candidates can upload their resume and build a profile containing their skills, experience, and qualifications.</p>
@@ -79,7 +79,7 @@ const Home = () => {
           </div>
           {/* Cards Div */}
           <div className='flex px-10 gap-10 text-[#09080E] mt-20'>
-            <div className='flex flex-col bg-[#FE6807] items-center px-10 py-10 space-y-10'>
+            <div className='flex flex-col bg-[#FE6807] items-center rounded-2xl px-10 py-10 space-y-10'>
               <p className='font-rose font-bold text-3xl'>Find opportunities that fit you.</p>
               <p className='font-rose font-bold text-2xl'>
                 Create your profile, upload your resume, explore available jobs, and apply to opportunities that match your skills and
@@ -93,7 +93,7 @@ const Home = () => {
                 <FaArrowRight className='group-hover:rotate-270 transition-all ease duration-300 pb-1'/> 
               </button>
             </div>
-            <div className='flex flex-col bg-[#FE6807] items-center px-10 py-10 space-y-10'>
+            <div className='flex flex-col bg-[#FE6807] items-center rounded-2xl px-10 py-10 space-y-10'>
               <p className='font-rose font-bold text-3xl'>Find candidates that fit your requirements.</p>
               <p className='font-rose font-bold text-2xl'>
                 Create job listings, define what you're looking for, and discover candidates based on the skills and experience in their resumes.
@@ -105,6 +105,56 @@ const Home = () => {
                 Find Candidates
                 <FaArrowRight className='group-hover:rotate-270 transition-all ease duration-300 pb-1'/> 
               </button>
+            </div>
+          </div>
+        </div>
+        {/* Why HireLens Sections */}
+        <div className='min-h-150 py-15 bg-[#FE6807] text-[#09080E]'>
+          <p className='font-rose font-bold text-5xl w-fit mx-auto'>Less searching. More hiring.</p>
+          <p className='font-rose font-bold text-3xl mt-15 pl-20'>
+            HireLens is designed to bring the most relevant candidate information closer to the recruiter, making it easier to review
+            applications and focus on the people who fit the role.
+          </p>
+          <div className='grid grid-cols-4 px-10 mt-20 gap-5'>
+            <div 
+              className='bg-[#09080E] text-[#FE6807] px-5 py-7 space-y-5 rounded-lg hover:shadow-white
+              hover:shadow-lg hover:scale-105 group transition-all ease duration-300'
+            >
+              <p className='font-bebas text-3xl'>
+                Resume-Based Profiles
+                <div className='bg-[#FE6807] scale-x-0 h-1 w-[75%] group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></div>
+              </p>
+              <p className='font-rose text-xl'>Keep candidate information organized around the experience, skills, and qualifications provided in their resumes.</p>
+            </div>
+            <div
+              className='bg-[#09080E] text-[#FE6807] px-5 py-7 space-y-5 rounded-lg hover:shadow-white
+              hover:shadow-lg hover:scale-105 group transition-all ease duration-300'
+            >
+              <p className='font-bebas text-3xl'>
+                Requirement-Focused
+                <div className='bg-[#FE6807] scale-x-0 h-1 w-[75%] group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></div>
+              </p>
+              <p className='font-rose text-xl'>Define the skills and qualifications that matter for each job you're hiring for.</p>
+            </div>
+            <div
+              className='bg-[#09080E] text-[#FE6807] px-5 py-7 space-y-5 rounded-lg hover:shadow-white
+              hover:shadow-lg hover:scale-105 group transition-all ease duration-300'
+            >
+              <p className='font-bebas text-3xl'>
+                Organized Applications
+                <div className='bg-[#FE6807] scale-x-0 h-1 w-[75%] group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></div>
+              </p>
+              <p className='font-rose text-xl'>Keep jobs, applications, and candidate information structured in one place.</p>
+            </div>
+            <div
+              className='bg-[#09080E] text-[#FE6807] px-5 py-7 space-y-5 rounded-lg hover:shadow-white
+              hover:shadow-lg hover:scale-105 group transition-all ease duration-300'
+            >
+              <p className='font-bebas text-3xl'>
+                Relevant Matches
+                <div className='bg-[#FE6807] scale-x-0 h-1 w-[75%] group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></div>
+              </p>
+              <p className='font-rose text-xl'>Make it easier to identify candidates whose profiles align with your job requirements.</p>
             </div>
           </div>
         </div>
