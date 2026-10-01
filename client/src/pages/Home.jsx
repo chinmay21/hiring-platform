@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer';
 import { FaArrowRight } from "react-icons/fa";
 
 const Home = () => {
@@ -44,7 +45,7 @@ const Home = () => {
           </p>
         </div>
         {/* How It Works Section */}
-        <div className='min-h-150 py-15 bg-[#FE6807] text-[#09080E]'>
+        <div id='how-it-works' className='min-h-150 py-15 bg-[#FE6807] text-[#09080E]'>
           <div>
             <p className='font-rose font-bold text-5xl w-fit mx-auto'>How HireLens Works</p>
             <p className='font-rose font-bold text-3xl mt-15 w-fit mx-auto'>From resume to relevant opportunity, HireLens keeps the process simple.</p>
@@ -122,7 +123,7 @@ const Home = () => {
             >
               <p className='font-bebas text-3xl'>
                 Resume-Based Profiles
-                <div className='bg-[#FE6807] scale-x-0 h-1 w-[75%] group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></div>
+                <span className='bg-[#FE6807] scale-x-0 h-1 w-[75%] block group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></span>
               </p>
               <p className='font-rose text-xl'>Keep candidate information organized around the experience, skills, and qualifications provided in their resumes.</p>
             </div>
@@ -132,7 +133,7 @@ const Home = () => {
             >
               <p className='font-bebas text-3xl'>
                 Requirement-Focused
-                <div className='bg-[#FE6807] scale-x-0 h-1 w-[75%] group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></div>
+                <span className='bg-[#FE6807] scale-x-0 h-1 w-[75%] block group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></span>
               </p>
               <p className='font-rose text-xl'>Define the skills and qualifications that matter for each job you're hiring for.</p>
             </div>
@@ -142,7 +143,7 @@ const Home = () => {
             >
               <p className='font-bebas text-3xl'>
                 Organized Applications
-                <div className='bg-[#FE6807] scale-x-0 h-1 w-[75%] group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></div>
+                <span className='bg-[#FE6807] scale-x-0 h-1 w-[75%] block group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></span>
               </p>
               <p className='font-rose text-xl'>Keep jobs, applications, and candidate information structured in one place.</p>
             </div>
@@ -152,13 +153,14 @@ const Home = () => {
             >
               <p className='font-bebas text-3xl'>
                 Relevant Matches
-                <div className='bg-[#FE6807] scale-x-0 h-1 w-[75%] group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></div>
+                <span className='bg-[#FE6807] scale-x-0 h-1 w-[75%] block group-hover:scale-x-100 origin-left transition-all ease-in duration-150'></span>
               </p>
               <p className='font-rose text-xl'>Make it easier to identify candidates whose profiles align with your job requirements.</p>
             </div>
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   )
 }
