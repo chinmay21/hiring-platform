@@ -6,7 +6,7 @@ import { FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className='bg-[#09080E] text-[#FE6807] py-15'>
+    <div className='bg-[#5D0703] text-[#EEDCC8] py-15'>
         {/* Container Div */}
         <div className='py-10 px-10 space-y-5'>
             <p className='font-rose text-3xl'>HireLens</p>
@@ -16,11 +16,11 @@ const Footer = () => {
             <div className='flex flex-col gap-5'>
                 <div className='text-3xl font-bebas'>
                     Product
-                    <div className='h-[0.9px] w-[50%] bg-[#FE6807]'></div>
+                    <div className='h-[0.9px] w-[50%] bg-[#EEDCC8]'></div>
                 </div>
                 <a 
                     className='text-xl font-rose cursor-pointer hover:translate-x-5 hover:scale-120 transition-all opacity-70
-                    hover:opacity-100'
+                    hover:opacity-100 w-fit'
                 >
                     Jobs
                 </a>
@@ -47,15 +47,17 @@ const Footer = () => {
             <div className='flex flex-col gap-5'>
                 <div className='text-3xl font-bebas'>
                     Company
-                    <div className='h-[0.9px] w-[50%] bg-[#FE6807]'></div>
+                    <div className='h-[0.9px] w-[50%] bg-[#EEDCC8]'></div>
                 </div>
                 <a 
+                    href='/aboutUs'
                     className='text-xl font-rose cursor-pointer hover:translate-x-5 hover:scale-120 transition-all opacity-70
                     hover:opacity-100'
                 >
                     About Us
                 </a>
                 <a 
+                    href='/contactUs'
                     className='text-xl font-rose cursor-pointer hover:translate-x-5 hover:scale-120 transition-all opacity-70
                     hover:opacity-100'
                 >
@@ -65,7 +67,7 @@ const Footer = () => {
             <div className='flex flex-col gap-5'>
                 <div className='text-3xl font-bebas'>
                     Account
-                    <div className='h-[0.9px] w-[50%] bg-[#FE6807]'></div>
+                    <div className='h-[0.9px] w-[50%] bg-[#EEDCC8]'></div>
                 </div>
                 <a 
                     className='text-xl font-rose cursor-pointer hover:translate-x-5 hover:scale-120 transition-all opacity-70
@@ -83,7 +85,7 @@ const Footer = () => {
             <div className='flex flex-col gap-5'>
                 <div className='text-3xl font-bebas'>
                     Legal
-                    <div className='h-[0.9px] w-[50%] bg-[#FE6807]'></div>
+                    <div className='h-[0.9px] w-[50%] bg-[#EEDCC8]'></div>
                 </div>
                 <a 
                     className='text-xl font-rose cursor-pointer hover:translate-x-5 hover:scale-120 transition-all opacity-70
@@ -101,7 +103,7 @@ const Footer = () => {
             <div className='flex flex-col gap-5'>
                 <div className='text-3xl font-bebas'>
                     Follow Us
-                    <div className='h-[0.9px] w-[50%] bg-[#FE6807]'></div>
+                    <div className='h-[0.9px] w-[50%] bg-[#EEDCC8]'></div>
                 </div>
                 <div className='flex gap-5'>
                     <a className='text-3xl cursor-pointer opacity-70 hover:opacity-100'>
@@ -116,8 +118,8 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-        <div className='h-[0.5px] w-[75%] mx-auto mt-10 bg-[#FE6807]'></div>
-        <div className='text-[#FE6807] w-fit mx-auto py-5 font-rose text-lg'>© 2026 HireLens. All rights reserved.</div>
+        <div className='h-[0.5px] w-[75%] mx-auto mt-10 bg-[#EEDCC8]'></div>
+        <div className='text-[#EEDCC8] w-fit mx-auto py-5 font-rose text-lg'>© 2026 HireLens. All rights reserved.</div>
     </div>
   )
 }
