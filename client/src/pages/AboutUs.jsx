@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import 'animate.css'
 
 const AboutUs = () => {
   return (
@@ -118,6 +119,45 @@ const AboutUs = () => {
                             <li>AI/ML system development and integration</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            <div className='bg-[#EEDCC8] text-[#5D0703] py-10 px-10 space-y-10'>
+                <h2 className='font-bebas text-5xl w-fit mx-auto'>Built by Two Developers</h2>
+                <p className='list-disc font-rose text-2xl'>
+                    HireLens brings together two different areas of software development: full-stack engineering and machine
+                    learning. The web platform provides the infrastructure for candidates and recruiters to interact, while
+                    the AI/ML component is designed to analyze candidate information and help identify relevant matches. Together,
+                    these components form the foundation of HireLens.
+                </p>
+            </div>
+            <div className='bg-[#5D0703] text-[#EEDCC8] py-10'>
+                <h2 className='font-bebas text-5xl w-fit mx-auto'>Built to Learn. Built to Solve.</h2>
+                <p className='font-rose text-2xl pl-5 mt-10'>
+                    HireLens started as a practical project and has grown into an opportunity to explore how modern web development and
+                    machine learning can work together to solve a real-world problem.
+                </p>
+                <p className='font-rose text-2xl pl-5 mt-10'>
+                    The goal isn't simply to build another hiring platform. It's to understand how real applications are designed,
+                    developed, integrated, and improved—and to keep building better software along the way.
+                </p>
+            </div>
+            <div className='bg-[#EEDCC8] text-[#5D0703] py-10'>
+                <h2 className='font-bebas text-5xl w-fit mx-auto'>Ready to Get Started?</h2>
+                <p className='font-rose text-2xl pl-5 mt-10'>
+                    Whether you're looking for your next opportunity or searching for your next hire, HireLens is here to help you take the
+                    next step.
+                </p>
+                <div className='flex justify-evenly w-[50%] mx-auto mt-15'>
+                    <button
+                        className='text-[#EEDCC8] bg-[#5D0703] px-5 py-1 font-bebas text-2xl cursor-pointer rounded-xl hover:[animate__animated] hover:[animate__rubberBand]'
+                    >
+                        Explore Jobs
+                    </button>
+                    <button
+                        className='text-[#EEDCC8] bg-[#5D0703] px-5 py-1 font-bebas text-2xl cursor-pointer rounded-xl animate__animated animate__rubberBand animate__infinite'
+                    >
+                        Get Started
+                    </button>
                 </div>
             </div>
         </div>

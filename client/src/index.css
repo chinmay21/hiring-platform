@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courgette&family=Red+Rose:wght@300..700&display=swap');
 @import "tailwindcss";
 
+
 @theme {
     --font-bebas: "Bebas Neue", sans-serif;
     --font-rose: "Red Rose", serif;
