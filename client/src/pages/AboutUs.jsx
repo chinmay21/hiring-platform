@@ -149,12 +149,14 @@ const AboutUs = () => {
                 </p>
                 <div className='flex justify-evenly w-[50%] mx-auto mt-15'>
                     <button
-                        className='text-[#EEDCC8] bg-[#5D0703] px-5 py-1 font-bebas text-2xl cursor-pointer rounded-xl hover:[animate__animated] hover:[animate__rubberBand]'
+                        className='text-[#EEDCC8] bg-[#5D0703] px-5 py-1 font-bebas text-2xl cursor-pointer rounded-xl hover:scale-110
+                        transition-all'
                     >
                         Explore Jobs
                     </button>
                     <button
-                        className='text-[#EEDCC8] bg-[#5D0703] px-5 py-1 font-bebas text-2xl cursor-pointer rounded-xl animate__animated animate__rubberBand animate__infinite'
+                        className='text-[#EEDCC8] bg-[#5D0703] px-5 py-1 font-bebas text-2xl cursor-pointer rounded-xl hover:scale-110
+                        transition-all'
                     >
                         Get Started
                     </button>
