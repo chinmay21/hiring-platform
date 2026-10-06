@@ -102,11 +102,12 @@ const ContactUs = () => {
                 <div className='w-fit mx-auto'>
                   <button
                     className='text-[#5D0703] bg-[#EEDCC8] px-5 py-2 w-55 text-2xl font-bebas rounded-2xl relative z-20 group
-                    hover:text-[#EEDCC8] cursor-pointer transition-all'
+                    hover:text-[#EEDCC8] hover:ring-[#EEDCC8] hover:ring-3 hover:shadow-[#EEDCC8] hover:shadow-lg
+                    cursor-pointer transition-all'
                     type='submit'
                   >
                     <span 
-                      className='absolute bg-[#C49A5A] h-12 top-0 w-55 left-0 scale-x-0 -z-10 group-hover:scale-x-100
+                      className='absolute bg-[#5D0703] h-12 top-0 w-55 left-0 scale-x-0 -z-10 group-hover:scale-x-100
                       origin-left rounded-2xl transition-all ease-in delay-100 duration-200'
                     >
                     </span>
@@ -122,7 +123,11 @@ const ContactUs = () => {
               HireLens is an evolving project, and every question, suggestion, and piece of feedback helps us make it better.
             </p>
             <p className='text-3xl font-rose'>Have something to share? We'd love to hear it.</p>
-            <a href='#contactUsForm' className='bg-[#5D0703] text-[#EEDCC8] px-10 w-55 py-3 rounded-lg font-bebas text-2xl hover:opacity-90 cursor-pointer'>
+            <a 
+              href='#contactUsForm' 
+              className='bg-[#5D0703] text-[#EEDCC8] px-10 w-55 py-3 rounded-lg font-bebas text-2xl hover:opacity-90
+              cursor-pointer'
+              >
               Send Your Feedback
             </a>
           </div>

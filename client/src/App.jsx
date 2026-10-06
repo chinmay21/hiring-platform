@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
+import Signup from './pages/Signup'
 
 
 function App() {
@@ -21,6 +22,10 @@ function App() {
         <Route
           path='/contactUs'
           element={<ContactUs/>}
+        />
+        <Route
+          path='/signUp'
+          element={<Signup/>}
         />
       </Routes>
     </BrowserRouter>

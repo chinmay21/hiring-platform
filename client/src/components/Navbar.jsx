@@ -1,7 +1,10 @@
 import React from 'react'
 import logo from '../assets/logo.png'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <div className='bg-[#5D0703] text-[#EEDCC8]'>
         {/* Container Div */}
@@ -16,13 +19,17 @@ const Navbar = () => {
             </div>
             {/* Button Div */}
             <div className='font-rose flex gap-x-15'>
-                <button className='bg-[#EEDCC8] text-[#5D0703] rounded-lg px-3 py-1 hover:bg-transparent cursor-pointer
-                 hover:text-[#EEDCC8] transition-all ease-in'
+                <button 
+                    onClick={() => navigate("/signup")}
+                    className='bg-[#EEDCC8] text-[#5D0703] rounded-lg px-3 py-1 hover:bg-transparent cursor-pointer
+                hover:text-[#EEDCC8] transition-all ease-in'
                 >
                     Signup
                 </button>
-                <button className='bg-[#EEDCC8] text-[#5D0703] rounded-lg px-3 py-1 hover:bg-transparent cursor-pointer
-                 hover:text-[#EEDCC8] transition-all ease-in'
+                <button
+                    onClick={() => navigate("/login")} 
+                    className='bg-[#EEDCC8] text-[#5D0703] rounded-lg px-3 py-1 hover:bg-transparent cursor-pointer
+                hover:text-[#EEDCC8] transition-all ease-in'
                 >
                     Login
                 </button>
