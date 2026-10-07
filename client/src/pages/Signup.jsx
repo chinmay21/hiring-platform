@@ -1,8 +1,16 @@
 import React from 'react'
+import logo from '../assets/logo.png'
 
 const Signup = () => {
   return (
-    <div>Signup</div>
+    <>
+      <div>
+        <div className='bg-[#5D0703]'>
+          <img src={logo}/>
+          <p></p>
+        </div>
+      </div>
+    </>
   )
 }
 
