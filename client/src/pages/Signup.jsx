@@ -3,32 +3,55 @@ import logo from '../assets/logo.png'
 import { BiSolidHide } from "react-icons/bi";
 import { HiMiniEye } from "react-icons/hi2";
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
+import { signup } from '../redux/operations/authAPI'; 
 
 const Signup = () => {
+
+  const {register, handleSubmit, setValue, formState: { errors } } = useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [hide, setHide] = useState(true);
   const [role, setRole] = useState("");
   const [applicantToggle, setApplicantToggle] = useState(true);
   const [employerToggle, setEmployerToggle] = useState(false);
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    dispatch(
+      signup({
+        name: data.name,
+        email: data.email,
+        role: data.role,
+        industry: data.industry,
+        password: data.password
+      })
+    )
+    .unwrap()
+    .then(() => {
+      toast.success("Signed up successfully");
+      navigate('/login');
+    })
+    .catch((error) => {
+      toast.error(`Error while signing up:${error}`);
+      console.log("Sign up failed:", error);
 
-    const formdata = new FormData(e.target);
-    formdata.append("role", role);
-    console.log([...formdata.entries()]);
-
-    e.target.reset();
-    setRole("");
+    })
+    console.log("Form Data:", data)
   }
 
   const applicantClickHandler = () => {
     setRole("Applicant")
+    setValue("role", "applicant", { shouldValidate: true })
     setApplicantToggle(true)
     setEmployerToggle(false)
   }
 
   const employerClickHandler = () => {
     setRole("Employer")
+    setValue("role", "employer", { shouldValidate: true })
     setApplicantToggle(false)
     setEmployerToggle(true)
   }
@@ -57,15 +80,14 @@ const Signup = () => {
             <p className='text-2xl font-rose'>Join HireLens and take the next step toward finding the right opportunity or the right talent.</p>
           </div>
           <div className='px-10 py-10'>
-            <form onSubmit={onSubmitHandler} className='text-[#5D0703] px-15 py-10 border-4 border-[#5D0703] rounded-xl'>
+            <form onSubmit={handleSubmit(onSubmit)} className='text-[#5D0703] px-15 py-10 border-4 border-[#5D0703] rounded-xl'>
               <div className='flex flex-col gap-5 mb-5'>
                 <label className='text-xl font-rose' htmlFor='name'>Full Name</label>
                 <input
                   className='outline-none border rounded-lg border-[#5D0703] py-2 px-3'
+                  {...register("name", { required: true })}
                   type='text'
-                  name='name'
                   id='name'
-                  required
                   placeholder='Enter your full name'
                 />
               </div>
@@ -73,10 +95,9 @@ const Signup = () => {
                 <label className='text-xl font-rose' htmlFor='email'>Email Address</label>
                 <input
                   className='outline-none border rounded-lg border-[#5D0703] py-2 px-3'
+                  {...register("email", { required: true })}
                   type='email'
-                  name='email'
                   id='email'
-                  required
                   placeholder='Enter your email address'
                 />
               </div>
@@ -100,10 +121,38 @@ const Signup = () => {
                     onClick={employerClickHandler}>Employer</button>
                 </div>
               </div>
+
+              <div className='flex flex-col gap-5 mb-5'>
+                <label className='text-xl font-rose' htmlFor='industry'>Industry</label>
+                <select
+                  {...register("industry", { required: true })}
+                  id='industry'
+                  placeholder='Select your industry'
+                  className='outline-none border font-rose focus:ring-[#5D0703] rounded-lg border-[#5D0703] py-2 px-5 bg-[#EEDCC8]'
+                >
+                  <option value="">Select your industry</option>
+                  <option value="Software Engineering">Software Engineering</option>
+                  <option value="FinTech & Banking">FinTech & Banking</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="E-Commerce & Retail">E-Commerce & Retail</option>
+                  <option value="Education & EdTech">Education & EdTech</option>
+                  <option value="Marketing & Advertising">Marketing & Advertising</option>
+                  <option value="Media & Entertainment">Media & Entertainment</option>
+                  <option value="Gaming">Gaming</option>
+                  <option value="Consulting">Consulting</option>
+                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="Automotive">Automotive</option>
+                  <option value="Telecommunications">Telecommunications</option>
+                  <option value="Real Estate">Real Estate</option>
+                  <option value="Travel & Hospitality">Travel & Hospitality</option>
+                  <option value="Logistics & Transportation">Logistics & Transportation</option>
+                </select>
+              </div>
               
               <label className='text-xl font-rose' htmlFor='password'>Password</label>
               <div className='flex items-center'>
                 <input
+                  {...register("password", { required:true })}
                   type={hide ? 'password': 'text'}
                   name='password'
                   id='password'

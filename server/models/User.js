@@ -11,12 +11,16 @@ const userSchema = mongoose.Schema({
     },
     role:{
         type: String,
-        enum: ["Employee", "Employer"],
+        enum: ["applicant", "employer"],
         required: true,
     },
     password:{
         type: String,
         required: true,
+    },
+    industry: {
+        type: String,
+        required: true
     },
     createdJobs:[{
         type: mongoose.Schema.Types.ObjectId,

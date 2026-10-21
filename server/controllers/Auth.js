@@ -4,9 +4,9 @@ const jwt = require("jsonwebtoken");
 
 exports.signup = async (req, res) => {
     try{
-        const {name, email, role, password} = req.body;
+        const {name, email, role, password, industry} = req.body;
 
-        if(!name || !email || !role || !password) {
+        if(!name || !email || !role || !password || !industry) {
             return res.status(400).json({
                 success:false,
                 message:"All the details are required!"
@@ -24,7 +24,7 @@ exports.signup = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await User.create({name: name, email:email, role:role, password:hashedPassword});
+        const user = await User.create({name: name, email:email, role:role, password:hashedPassword, industry:industry});
 
         user.password = undefined;
 

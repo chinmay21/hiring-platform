@@ -26,6 +26,10 @@ const jobSchema = mongoose.Schema({
         ref: "User",
         required: true,
     },
+    industry:{
+        type: String,
+        required: true
+    },
     applicants:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
