@@ -25,10 +25,6 @@ function App() {
           element={<ContactUs/>}
         />
         <Route
-          path='/signUp'
-          element={<Signup/>}
-        />
-        <Route
           path='/signup'
           element={<Signup/>}
         />
