@@ -1,19 +1,43 @@
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import logo from '../assets/logo.png'
 import { BiSolidHide } from "react-icons/bi"
 import { HiMiniEye } from "react-icons/hi2"
+import { useDispatch } from 'react-redux'
+import { data, useNavigate } from 'react-router-dom'
+import { login } from '../redux/operations/authAPI'
+import { toast } from 'react-toastify'
 
 const Login = () => {
     const [hide, setHide] = useState(true);
+    const { register, handleSubmit } = useForm();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.target);
-        console.log([...formData.entries()]);
-
-        e.target.reset();
-    }
+    const onSubmit = (data) => {
+        dispatch(
+            login({
+                email: data.email,
+                password: data.password,
+            })
+        )
+        .unwrap()
+        .then((result) => {
+            toast.success("Logged in successfully");
+            const role = result.user.role
+            console.log(role)
+            if(role === "applicant") {
+                navigate("/applicant/dashboard");
+            }
+            if(role === "employer") {
+                navigate("/employer/dashboard");
+            }
+        })
+        .catch((error) => {
+            toast.error(`Error while logging in:${error}`);
+            console.log("Login failed", error);
+        });
+    };
 
   return (
     <div className='min-h-screen flex flex-col bg-[#EEDCC8]'>
@@ -56,13 +80,14 @@ const Login = () => {
 
                 {/* Form Card */}
                 <div className='bg-white/40 border-4 border-[#5D0703] rounded-2xl p-6 sm:p-10 shadow-xl backdrop-blur-sm animate-scale-in'>
-                    <form onSubmit={onSubmitHandler} className='text-[#5D0703] space-y-6'>
+                    <form onSubmit={handleSubmit(onSubmit)} className='text-[#5D0703] space-y-6'>
                         {/* Email Field */}
                         <div className='flex flex-col gap-2'>
                             <label className='text-lg sm:text-xl font-rose font-semibold' htmlFor='email'>
                                 Email
                             </label>
                             <input 
+                                {...register("email", { required: true })}
                                 className='w-full outline-none border border-[#5D0703] rounded-lg py-2.5 px-3 bg-white/70 text-[#5D0703] focus:ring-2 focus:ring-[#5D0703]/30 focus:border-[#5D0703] transition-all duration-200 font-rose'
                                 type='email' 
                                 name='email' 
@@ -79,6 +104,7 @@ const Login = () => {
                             </label>
                             <div className='relative w-full'>
                                 <input 
+                                    {...register("password", { required: true })}
                                     type={hide ? 'password': 'text'} 
                                     name='password' 
                                     id='password'
