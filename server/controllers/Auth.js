@@ -66,6 +66,7 @@ exports.login = async (req, res) => {
             id: user._id,
             role: user.role,
             email: user.email,
+            industry: user.industry || null,
         }
 
         if(await bcrypt.compare(password, user.password)) {

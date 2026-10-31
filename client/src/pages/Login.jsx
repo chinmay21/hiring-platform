@@ -25,9 +25,11 @@ const Login = () => {
         .then((result) => {
             toast.success("Logged in successfully");
             const role = result.user.role
+            const industry = result.user.industry;
+            const slug = industry.toLowerCase().split(" ").join("-")
             console.log(role)
             if(role === "applicant") {
-                navigate("/applicant/dashboard");
+                navigate(`/applicant/${slug}/dashboard`);
             }
             if(role === "employer") {
                 navigate("/employer/dashboard");
