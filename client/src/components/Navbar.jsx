@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import logo from '../assets/logo.png'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { HiMenuAlt3, HiX } from "react-icons/hi"
@@ -6,6 +7,7 @@ import { HiMenuAlt3, HiX } from "react-icons/hi"
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { token, user } = useSelector((state) => state.auth);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [prevPath, setPrevPath] = useState(location.pathname);
@@ -69,24 +71,39 @@ const Navbar = () => {
         </nav>
 
         {/* Desktop Buttons */}
-        <div className='hidden md:flex font-rose items-center gap-x-4 lg:gap-x-6'>
-          <button 
-            onClick={() => navigate("/signup")}
-            className='bg-[#EEDCC8] text-[#5D0703] font-semibold rounded-lg px-4 py-1.5 border border-transparent 
-            hover:bg-transparent hover:border-[#EEDCC8] hover:text-[#EEDCC8] hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 
-            cursor-pointer transition-all duration-300'
-          >
-            Signup
-          </button>
-          <button
-            onClick={() => navigate("/login")} 
-            className='bg-[#EEDCC8] text-[#5D0703] font-semibold rounded-lg px-4 py-1.5 border border-transparent 
-            hover:bg-transparent hover:border-[#EEDCC8] hover:text-[#EEDCC8] hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 
-            cursor-pointer transition-all duration-300'
-          >
-            Login
-          </button>
-        </div>
+        {
+          token && user ? (
+            <div className='hidden md:flex font-rose items-center gap-x-4 lg:gap-x-6'>
+                <button 
+                  onClick={() => navigate("/my-jobs")}
+                  className='bg-[#EEDCC8] text-[#5D0703] font-semibold rounded-lg px-4 py-1.5 border border-transparent 
+                  hover:bg-transparent hover:border-[#EEDCC8] hover:text-[#EEDCC8] hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 
+                  cursor-pointer transition-all duration-300'
+                >
+                  My Jobs
+                </button>
+            </div>
+          ) : (
+            <div className='hidden md:flex font-rose items-center gap-x-4 lg:gap-x-6'>
+                <button 
+                  onClick={() => navigate("/signup")}
+                  className='bg-[#EEDCC8] text-[#5D0703] font-semibold rounded-lg px-4 py-1.5 border border-transparent 
+                  hover:bg-transparent hover:border-[#EEDCC8] hover:text-[#EEDCC8] hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 
+                  cursor-pointer transition-all duration-300'
+                >
+                  Signup
+                </button>
+                <button
+                  onClick={() => navigate("/login")} 
+                  className='bg-[#EEDCC8] text-[#5D0703] font-semibold rounded-lg px-4 py-1.5 border border-transparent 
+                  hover:bg-transparent hover:border-[#EEDCC8] hover:text-[#EEDCC8] hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 
+                  cursor-pointer transition-all duration-300'
+                >
+                  Login
+                </button>
+            </div>
+          )
+        }
 
         {/* Mobile Hamburger Button */}
         <button
