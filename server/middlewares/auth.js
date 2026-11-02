@@ -35,7 +35,7 @@ exports.auth = async (req, res, next) => {
 
 exports.isEmployee = async (req, res, next) => {
     try{
-        if(req.user.role != "Employee") {
+        if(req.user.role != "applicant") {
             return res.status(401).json({
                 success:false,
                 message:"This is a protected route for employees"
@@ -53,7 +53,7 @@ exports.isEmployee = async (req, res, next) => {
 
 exports.isEmployer = async (req, res, next) => {
     try{
-        if(req.user.role != "Employer") {
+        if(req.user.role != "employer") {
             return res.status(401).json({
                 success:false,
                 message:"This is a protected route for Employers"

@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 exports.createJob = async (req, res) => {
     try{
-        const {jobTitle, openings, jobDescription, salary, requiredSkills} = req.body;
+        const {jobTitle, openings, jobDescription, salary, requiredSkills, industry} = req.body;
         const user = req.user.id;
         console.log(user)
 
@@ -14,7 +14,7 @@ exports.createJob = async (req, res) => {
             });
         }
 
-        if(!jobTitle || !openings || !jobDescription || !salary || !requiredSkills) {
+        if(!jobTitle || !openings || !jobDescription || !salary || !requiredSkills || !industry) {
             return res.status(400).json({
                 success:false,
                 message:"All the details are required"
@@ -22,7 +22,7 @@ exports.createJob = async (req, res) => {
         }
 
         const job = await Job.create({jobTitle:jobTitle, openings:openings, jobDescription:jobDescription, salary:salary,
-                                     requiredSkills:requiredSkills, createdBy:user});
+                                     requiredSkills:requiredSkills, industry:industry, createdBy:user});
         
         const populateJob = await job.populate("createdBy", "name");
         
@@ -44,11 +44,11 @@ exports.createJob = async (req, res) => {
 
 exports.updateJob = async (req, res) => {
     try{
-        const {jobTitle, openings, jobDescription, salary, requiredSkills} = req.body;
+        const {jobTitle, openings, jobDescription, salary, requiredSkills, industry} = req.body;
         const jobId = req.params.id;
         const userId = req.user.id;
 
-        if(jobTitle || openings || jobDescription || salary || requiredSkills) {
+        if(jobTitle || openings || jobDescription || salary || requiredSkills || industry) {
             
             const job = await Job.findById(jobId);
 
@@ -59,8 +59,9 @@ exports.updateJob = async (req, res) => {
                 });
             }
 
-            const updatedJob = await Job.findByIdAndUpdate(jobId, {jobTitle:jobTitle, openings:openings, jobDescription:jobDescription,
-                                                         salary:salary, $push: {requiredSkills: { $each: requiredSkills } } }, { new: true });
+            const updatedJob = await Job.findByIdAndUpdate(jobId, {jobTitle:jobTitle, openings:openings, jobDescription:jobDescription, 
+                                                        industry:industry, salary:salary, $push: {requiredSkills: { $each: requiredSkills } } },
+                                                        { new: true });
             
             return res.status(200).json({
                 success:true,
@@ -250,6 +251,46 @@ exports.getAllApplicants = async(req, res) => {
         return res.status(500).json({
             success:false,
             message:"Error occured while fetching all applicants"
+        });
+    }
+}
+
+exports.getUserJobs = async (req, res) => {
+    try{
+        const userId = req.user.id;
+        const industry = req.user.industry;
+        console.log("User industry:", req.user.industry);
+
+        if(!userId) {
+            return res.status(404).json({
+                success:false,
+                message:"Invalid User ID"
+            });
+        }
+
+        if(!industry) {
+            return res.status(404).json({
+                success:false,
+                message:"Industry not found"
+            });
+        }
+
+        const jobs = await Job.find({
+            industry: { $in: req.user.industry }
+        });
+
+        return res.status(200).json({
+            success:true,
+            message:"Filtered jobs fetched successfully",
+            data:jobs
+        });
+
+
+    }
+    catch(error) {
+        return res.status(500).json({
+            success:false,
+            message:"Unable to fetch jobs"
         });
     }
 }
