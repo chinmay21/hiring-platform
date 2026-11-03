@@ -33,7 +33,7 @@ exports.auth = async (req, res, next) => {
     }
 }
 
-exports.isEmployee = async (req, res, next) => {
+exports.isApplicant = async (req, res, next) => {
     try{
         if(req.user.role != "applicant") {
             return res.status(401).json({

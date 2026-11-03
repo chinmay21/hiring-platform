@@ -28,6 +28,8 @@ const jobSchema = mongoose.Schema({
     },
     industry:{
         type: String,
+        lowercase: true,
+        trim: true,
         required: true
     },
     applicants:[{

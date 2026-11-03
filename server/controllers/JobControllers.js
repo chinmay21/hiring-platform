@@ -256,10 +256,14 @@ exports.getAllApplicants = async(req, res) => {
 }
 
 exports.getUserJobs = async (req, res) => {
+    
     try{
         const userId = req.user.id;
         const industry = req.user.industry;
-        console.log("User industry:", req.user.industry);
+
+        console.log("User ID:", req.user.id);
+        console.log("User Industry:", req.user.industry);
+        console.log("Industry type:", typeof req.user.industry);
 
         if(!userId) {
             return res.status(404).json({
