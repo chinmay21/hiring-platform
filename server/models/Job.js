@@ -32,9 +32,9 @@ const jobSchema = mongoose.Schema({
         trim: true,
         required: true
     },
-    applicants:[{
+    applications:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Application",
     }]
 });
 
