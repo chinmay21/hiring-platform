@@ -8,3 +8,7 @@ export const endpoints = {
 export const jobEndpoints = {
     FETCH_FILTERED_JOBS_API: BASE_URL + "/api/v1/job/getUserJobs"
 }
+
+export const uploadcareEndpoints = {
+    GENERATE_UPLOADCARE_TOKEN_API: BASE_URL + "/api/v1/uploadcare/token"
+}
