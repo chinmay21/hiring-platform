@@ -43,6 +43,8 @@ const JobCard = (props) => {
                   </button>
                 </div>
               </div>
+              <button>Test button
+              </button>
 
           </div>
         ))
