@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const JobCard = (props) => {
+  const navigate = useNavigate();
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pl-10 py-15'>
       {
@@ -38,14 +40,12 @@ const JobCard = (props) => {
                   <button 
                     className='font-bebas py-1 rounded-lg cursor-pointer text-xl text-[#5D0703] bg-[#EEDCC8] w-[30%] hover:opacity-90
                     hover:scale-107 transition-all ease-in'
+                    onClick={() => navigate(`/applicant/${job.industry.toLowerCase().trim().replace(/\s+/g, "-")}/apply/${job._id}`)}
                   >
                     Apply
                   </button>
                 </div>
               </div>
-              <button>Test button
-              </button>
-
           </div>
         ))
       }
