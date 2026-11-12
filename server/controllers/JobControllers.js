@@ -298,3 +298,39 @@ exports.getUserJobs = async (req, res) => {
         });
     }
 }
+
+exports.getJob = async (req, res) => {
+    try{
+        const jobId  = req.params.id;
+
+        if(!jobId) {
+            return res.status(500).json({
+                success:false,
+                message:"Job ID is missing",
+            });
+        }
+
+        const job = await Job.findById(jobId);
+
+        if(!job) {
+            return res.status(404).json({
+                success:false,
+                message:"Job not found",
+            });
+        }
+
+        return res.status(200).json({
+            success:true,
+            message:"Job fetched successfully",
+            job,
+        });
+    }
+    catch(error) {
+        console.error("Error occured while fetching job:", error);
+        return res.status(500).json({
+            success:false,
+            message:"Unable to fetch job",
+            error,
+        });
+    }
+}

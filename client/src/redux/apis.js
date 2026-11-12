@@ -6,7 +6,8 @@ export const endpoints = {
 }
 
 export const jobEndpoints = {
-    FETCH_FILTERED_JOBS_API: BASE_URL + "/api/v1/job/getUserJobs"
+    FETCH_FILTERED_JOBS_API: BASE_URL + "/api/v1/job/getUserJobs",
+    FETCH_JOB_API: BASE_URL + "/api/v1/job/getJob/:id"
 }
 
 export const uploadcareEndpoints = {

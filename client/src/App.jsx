@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify'
 import AuthRedirect from './components/auth/AuthRedirect'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import ApplicantDashboard from './components/dashboards/ApplicantDashboard'
+import JobApplication from './pages/JobApplication'
 
 
 function App() {
@@ -54,6 +55,12 @@ function App() {
           <Route
             path='/applicant/:industry/dashboard'
             element={<ApplicantDashboard/>}
+          />
+        </Route>
+        <Route element={<ProtectedRoute allowedRoles={['applicant']}/>}>
+          <Route
+            path='/applicant/:industry/apply/:jobId'
+            element={<JobApplication/>}
           />
         </Route>
       </Routes>

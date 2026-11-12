@@ -6,6 +6,9 @@ const JobCard = (props) => {
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pl-10 py-15'>
       {
+        console.log("JOB:", props)
+      }
+      {
         props.jobs.map((job) => (
           <div className='bg-[#EEDCC8] py-7 px-5 w-[90%]' key={job._id}>
               <div className='flex flex-col gap-5 text-center max-h-[95%] py-15 px-3 font-rose rounded-xl bg-[#5D0703] text-[#EEDCC8]'>
@@ -36,6 +39,12 @@ const JobCard = (props) => {
                   </span>
                   <span>{job.openings}</span>
                 </div>
+                {/* <div className='space-x-3'>
+                  <span>
+                    Applicants:
+                  </span>
+                  <span>{job.applicants}</span>
+                </div> */}
                 <div>
                   <button 
                     className='font-bebas py-1 rounded-lg cursor-pointer text-xl text-[#5D0703] bg-[#EEDCC8] w-[30%] hover:opacity-90

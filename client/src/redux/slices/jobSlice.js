@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getFilteredJobs } from "../operations/jobAPI";
+import { getFilteredJobs, getJobById } from "../operations/jobAPI";
 
 const initialState = {
     jobs: [],
     filteredJobs: [],
+    job: {},
     loading: false,
     error: null
 }
@@ -17,6 +18,9 @@ const jobSlice = createSlice({
         },
         setFilteredJobs(state, value) {
             state.filteredJobs = value.payload
+        },
+        setJob(state, value) {
+            state.job = value.payload
         }
     },
     extraReducers: (builder) => {
@@ -28,10 +32,22 @@ const jobSlice = createSlice({
 
             .addCase(getFilteredJobs.fulfilled, (state, action) => {
                 state.loading = false;
-                state.filteredJobs = action.payload.data
+                state.filteredJobs = action.payload.data;
             })
 
             .addCase(getFilteredJobs.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(getJobById.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getJobById.fulfilled, (state, action) => {
+                state.loading = false;
+                state.job = action.payload;
+            })
+            .addCase(getJobById.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
@@ -39,5 +55,5 @@ const jobSlice = createSlice({
 
 });
 
-export const {setJobs, setFilteredJobs} = jobSlice.actions;
+export const {setJobs, setFilteredJobs, setJob} = jobSlice.actions;
 export default jobSlice.reducer;
