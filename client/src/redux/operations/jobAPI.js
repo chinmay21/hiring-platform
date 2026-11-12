@@ -16,15 +16,17 @@ export const getFilteredJobs = createAsyncThunk('/jobs/getFilteredJobs', async(_
     }
 });
 
-export const getJobById = createAsyncThunk('/jobs/getJobById/', async(_, thunkAPI) => {
+export const getJobById = createAsyncThunk('/jobs/getJobById/', async(jobId, thunkAPI) => {
     try{
-        const response = await apiConnector("GET", jobEndpoints.FETCH_JOB_API);
+        const response = await apiConnector("GET", `${jobEndpoints.FETCH_JOB_API}${jobId}`);
 
-        console.log(response.data);
+        console.log(response.data.job);
 
-        return response.data;
+        return response.data.job;
     }
     catch(error) {
-        return thunkAPI.rejectWithValue(error.response?.data?.message);
+        console.error("getJobById error:", error.response?.data || error);
+
+        return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
     }
 })

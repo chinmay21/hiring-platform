@@ -14,7 +14,7 @@ axiosInstance.interceptors.response.use(
             window.location.replace("/login")
         }
 
-        return response.Promise.reject(error);
+        return Promise.reject(error);
     }
 );
 

@@ -26,7 +26,7 @@ const JobApplication = () => {
             <div>
                 <p>JOBS</p>
                 <span>/</span>
-                <p>{job.industry.toUpperCase()}</p>
+                <p>{job?.industry}</p>
                 <span>/</span>
                 <p>Job Details</p>
                 <span>/</span>

@@ -4,7 +4,7 @@ import { getFilteredJobs, getJobById } from "../operations/jobAPI";
 const initialState = {
     jobs: [],
     filteredJobs: [],
-    job: {},
+    job: null,
     loading: false,
     error: null
 }
