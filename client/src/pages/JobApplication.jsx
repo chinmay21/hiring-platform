@@ -10,7 +10,7 @@ const JobApplication = () => {
     const { jobId } = useParams();
     const dispatch = useDispatch();
     const { job, loading } = useSelector((state) => state.job);
-
+    const user = JSON.parse(localStorage.getItem("user"));
     useEffect(() => {
         dispatch(getJobById(jobId))
         .unwrap()
@@ -23,13 +23,27 @@ const JobApplication = () => {
     <div>
         <Navbar/>
         <div>
+            <div className='flex gap-5 mt-5 px-5 font-bebas text-lg'>
+                <div className='flex gap-1'>
+                    <p>JOBS</p>
+                    <span>/</span>
+                </div>
+                <div className='flex gap-1'>
+                    <p>{user.industry.toUpperCase()}</p>
+                    <span>/</span>
+                </div>
+                <div className='flex gap-1'>
+                    <p>Job Details</p>
+                    <span>/</span>
+                </div>
+            </div>
+            {/* Job card */}
             <div>
-                <p>JOBS</p>
-                <span>/</span>
-                <p>{job?.industry}</p>
-                <span>/</span>
-                <p>Job Details</p>
-                <span>/</span>
+                <p>{job.jobTitle}</p>
+                <div>
+                    <p>{job.company}</p>
+                    <p>{job.industry}</p>
+                </div>
             </div>
         </div>
     </div>

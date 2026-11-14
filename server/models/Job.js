@@ -17,6 +17,10 @@ const jobSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+    company:{
+        type: String,
+        required: true,
+    },
     requiredSkills:[{
         type: String,
         required: true

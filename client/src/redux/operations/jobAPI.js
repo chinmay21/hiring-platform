@@ -7,8 +7,6 @@ export const getFilteredJobs = createAsyncThunk('/jobs/getFilteredJobs', async(_
     try{
         const response = await apiConnector("GET", jobEndpoints.FETCH_FILTERED_JOBS_API);
 
-        console.log(response.data);
-
         return response.data;
     }
     catch(error) {
@@ -16,7 +14,7 @@ export const getFilteredJobs = createAsyncThunk('/jobs/getFilteredJobs', async(_
     }
 });
 
-export const getJobById = createAsyncThunk('/jobs/getJobById/', async(jobId, thunkAPI) => {
+export const getJobById = createAsyncThunk('/jobs/getJobById', async(jobId, thunkAPI) => {
     try{
         const response = await apiConnector("GET", `${jobEndpoints.FETCH_JOB_API}${jobId}`);
 
