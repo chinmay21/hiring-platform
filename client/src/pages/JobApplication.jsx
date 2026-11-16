@@ -47,6 +47,11 @@ const JobApplication = () => {
         setError("");
         setResume(file);
     };
+
+    const onSubmitHandler = () => {
+        
+    };
+
   return (
     <div className='bg-[#EEDCC8]'>
         <Navbar/>
