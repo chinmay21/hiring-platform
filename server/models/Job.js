@@ -36,10 +36,6 @@ const jobSchema = mongoose.Schema({
         trim: true,
         required: true
     },
-    applications:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Application",
-    }]
 });
 
 module.exports = mongoose.model("Job", jobSchema);

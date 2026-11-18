@@ -1,5 +1,4 @@
 import Application from "../models/Application";
-import Job from "../models/Job";
 
 exports.submitApplication = async (req, res) => {
     try{
@@ -33,10 +32,6 @@ exports.submitApplication = async (req, res) => {
         const application = await Application.create({applicant: applicantId, job: jobId, resumeUUID: resumeUUID,
                                                          resumeURL: `https://ucarecdn.com/${resumeUUID}/`, applicationStatus: "Pending" });
 
-        await Job.findByIdAndUpdate(jobId, {
-            $push: { applications: application._id },
-        });
-
         return res.status(200).json({
             success: true,
             message: "Application submitted successfully",
@@ -49,6 +44,34 @@ exports.submitApplication = async (req, res) => {
         return res.status(500).json({
             success:false,
             message:"Error occured while applying for job!"
+        });
+    }
+}
+
+exports.getMyApplications = async (req, res) => {
+    try{
+        const userId = req.user.id;
+
+        if(!userId) {
+            return res.status(400).json({
+                success:false,
+                message:"Invalid user ID",
+            });
+        }
+
+        const applications = await Application.find({ applicant: userId }).populate("job").exec();
+
+        return res.status(200).json({
+            success:true,
+            message:"Applications fetched successfully",
+            data:applications,
+        });
+    }
+    catch(error) {
+        console.error("Error has occured:", error);
+        return res.status(500).json({
+            success:false,
+            message:"Unable to fetch applications, error occured",
         });
     }
 }

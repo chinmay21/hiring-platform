@@ -26,10 +26,6 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Job"
     }],
-    appliedJobs:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Job",
-    }],
     token:{
         type: String,
     }
