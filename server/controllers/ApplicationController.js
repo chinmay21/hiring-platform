@@ -1,4 +1,5 @@
 import Application from "../models/Application";
+import Job from "../models/Job";
 
 exports.submitApplication = async (req, res) => {
     try{
@@ -72,6 +73,44 @@ exports.getMyApplications = async (req, res) => {
         return res.status(500).json({
             success:false,
             message:"Unable to fetch applications, error occured",
+        });
+    }
+}
+
+exports.getJobApplications = async (req, res) => {
+    try{
+        const jobId = req.params.jobId;
+
+        const job = await Job.findById(jobId);
+
+        if(!job) {
+            return res.status(404).json({
+                success:false,
+                message:"No job found",
+            });
+        }
+
+        if(job.createdBy.toString() !== req.user.id) {
+            return res.status(403).json({
+                success:false,
+                message:"You are not authorized to view these applications"
+            });
+        }
+
+        const applications = await Application.find({ job:jobId }).populate("applicant").populate("job").exec();
+
+        return res.status(200).json({
+            success:true,
+            message:"Applications for current job fetched successfully",
+            data:applications,
+        });
+
+    }
+    catch(error) {
+        console.error("Error occured while getting job applications:", error);
+        return res.status(500).json({
+            success:false,
+            message:"Error occured while getting job applications"
         });
     }
 }
