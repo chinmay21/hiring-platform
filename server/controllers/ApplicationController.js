@@ -114,3 +114,82 @@ exports.getJobApplications = async (req, res) => {
         });
     }
 }
+
+exports.updateApplicationStatus = async (req, res) => {
+    try{
+        const userId = req.user.id;
+
+        const { status } = req.body;
+
+        const applicationId = req.params.applicationId;
+
+        const allowedStatuses = [
+            "Pending",
+            "Reviewed",
+            "Shortlisted",
+            "Rejected"
+        ];
+
+        if(!userId) {
+            return res.status(400).json({
+                success:false,
+                message:"Invalid user ID",
+            });
+        }
+
+        if(!allowedStatuses.includes(status)) {
+            return res.status(400).json({
+                success:false,
+                message:"Request's body is empty",
+            });
+        }
+
+        if(!applicationId) {
+            return res.status(404).json({
+                success:false,
+                message:"Invalid application ID",
+            });
+        }
+
+        const application = await Application.findById(applicationId).populate("job");
+        
+
+        if(!application) {
+            return res.status(400).json({
+                success:false,
+                message:"No application found",
+            });
+        }
+
+        if(!application.job) {
+            return res.status(404).json({
+                success:false,
+                message:"Associated job not found",
+            });
+        }
+
+        if(application.job.createdBy.toString() !== userId) {
+            return res.status(403).json({
+                success:false,
+                message:"You are not authorized to update this application",
+            });
+        }
+
+        application.applicationStatus = status;
+        await application.save();
+        
+        return res.status(200).json({
+            success:true,
+            message:"Application's status updates successfully",
+            data:application
+        });
+
+    }
+    catch(error) {
+        console.error("Error occured while updating application's status", error);
+        return res.status(500).json({
+            success:false,
+            message:"Unable to update application's status",
+        });
+    }
+}
