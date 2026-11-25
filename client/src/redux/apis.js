@@ -13,3 +13,7 @@ export const jobEndpoints = {
 export const uploadcareEndpoints = {
     GENERATE_UPLOADCARE_TOKEN_API: BASE_URL + "/api/v1/uploadcare/token"
 }
+
+export const applicationEndpoints = {
+    SUBMIT_APPLICATION_API: BASE_URL + "/api/v1/application/:jobId/apply"
+}

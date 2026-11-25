@@ -1,5 +1,5 @@
-import Application from "../models/Application";
-import Job from "../models/Job";
+const Application = require("../models/Application");
+const Job = require("../models/Job");
 
 exports.submitApplication = async (req, res) => {
     try{
