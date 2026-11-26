@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getJobById } from '../redux/operations/jobAPI'
+import { uploadResume } from '../redux/operations/uploadcareAPI'
+import { submitApplication } from '../redux/operations/applicationAPI'
 import { toast } from 'react-toastify'
 import { FaWallet } from "react-icons/fa";
 import { BsFillPeopleFill } from "react-icons/bs";
@@ -16,6 +18,7 @@ const JobApplication = () => {
     const [resume, setResume] = useState(null);
     const [error, setError] = useState("");
     const applicationRef = useRef(null);
+
     useEffect(() => {
         dispatch(getJobById(jobId))
         .unwrap()
@@ -48,9 +51,37 @@ const JobApplication = () => {
         setResume(file);
     };
 
-    const onSubmitHandler = () => {
-        
-    };
+    
+const onSubmitHandler = async () => {
+    if (!resume) {
+        toast.error("Please upload a valid resume!");
+        return;
+    }
+
+    try {
+        const uploaded = await dispatch(uploadResume(resume)).unwrap();
+
+        await dispatch(submitApplication({
+            jobId,
+            resumeUUID: uploaded.uuid
+        })).unwrap();
+
+        toast.success("Application submitted successfully!");
+
+        setResume(null);
+        document.getElementById("resume").value = "";
+
+    } catch (error) {
+        toast.error(
+            typeof error === "string"
+                ? error
+                : error.message || "Unable to submit your application"
+        );
+
+        console.error("Application submission failed:", error);
+    }
+};
+
 
   return (
     <div className='bg-[#EEDCC8]'>
@@ -200,6 +231,7 @@ const JobApplication = () => {
                                     <button
                                         type="button"
                                         disabled={!resume}
+                                        onClick={onSubmitHandler}
                                         className='w-full bg-[#5D0703] text-[#EEDCC8] rounded-xl
                                         py-2 mt-5 cursor-pointer disabled:opacity-50'
                                     >
