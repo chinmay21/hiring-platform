@@ -24,7 +24,7 @@ export const uploadResume = createAsyncThunk("uploadcare/uploadResume", async(re
         
         formData.append(
             "UPLOADCARE_PUB_KEY",
-            import.meta.env.VITE_UPLOADCARE_PUBLIC_KEY
+            import.meta.env.VITE_UPLOAD_CARE_PUBLIC_KEY
         );
 
         formData.append("UPLOADCARE_STORE", "auto");
@@ -51,7 +51,7 @@ export const uploadResume = createAsyncThunk("uploadcare/uploadResume", async(re
 
         return {
             uuid: data.file,
-            resumeURL: `https://ucarecdn.com/${data.file}/`,
+            resumeURL: `${import.meta.env.VITE_UPLOADCARE_CDN_BASE}/${data.file}/${encodeURIComponent(resume.name)}`,
         };
 
     }

@@ -31,7 +31,7 @@ exports.submitApplication = async (req, res) => {
         }
 
         const application = await Application.create({applicant: applicantId, job: jobId, resumeUUID: resumeUUID,
-                                                         resumeURL: `https://ucarecdn.com/${resumeUUID}/`, applicationStatus: "Pending" });
+                                                         resumeURL: `https://lp7213gcij.ucarecd.net/${resumeUUID}/`, applicationStatus: "Pending" });
 
         return res.status(200).json({
             success: true,
