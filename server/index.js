@@ -4,7 +4,8 @@ const dbConnect = require('./config/database');
 const cors = require("cors");
 const userRoutes = require('./routes/User');
 const jobRoutes = require('./routes/Job');
-const uploadcareRoute = require('./routes/Uploadcare')
+const uploadcareRoute = require('./routes/Uploadcare');
+const applicationRoute = require('./routes/Application');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1', jobRoutes);
 app.use('/api/v1', uploadcareRoute);
+app.use('/api/v1', applicationRoute);
 
 dbConnect();
 

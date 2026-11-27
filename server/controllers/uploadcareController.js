@@ -2,7 +2,12 @@ const { randomUUID } = require("crypto");
 
 exports.generateUploadToken = async (req, res) => {
     try{
-        const secretKey =  process.env.UPLOADCARE_SECRET_KEY;
+        console.log(
+            "Uploadcare secret configured:",
+            Boolean(process.env.UPLOAD_CARE_SECRET_KEY)
+        );
+
+        const secretKey =  process.env.UPLOAD_CARE_SECRET_KEY;
 
         if(!secretKey) {
             console.log("Upload care secret key missing");
