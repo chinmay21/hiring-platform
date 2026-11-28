@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { jobEndpoints } from "../apis";
 import { apiConnector } from "../apiConnector";
-import { setJobs, setFilteredJobs } from "../slices/jobSlice";
 
 export const getFilteredJobs = createAsyncThunk('/jobs/getFilteredJobs', async(_,  thunkAPI) => {
     try{
@@ -27,4 +26,17 @@ export const getJobById = createAsyncThunk('/jobs/getJobById', async(jobId, thun
 
         return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
     }
-})
+});
+
+export const getAllJobs = createAsyncThunk('/job/getAllJobs', async(_, thunkAPI) => {
+    try{
+        const response = await apiConnector("GET", jobEndpoints.FETCH_ALL_JOBS);
+
+        return response.data;
+    }
+    catch(error) {
+        console.error("getAllJobs error:", error.response?.data || error);
+
+        return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
+});

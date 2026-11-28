@@ -10,6 +10,7 @@ import AuthRedirect from './components/auth/AuthRedirect'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import ApplicantDashboard from './components/dashboards/ApplicantDashboard'
 import JobApplication from './pages/JobApplication'
+import Jobs from './pages/Jobs'
 
 
 function App() {
@@ -63,6 +64,10 @@ function App() {
             element={<JobApplication/>}
           />
         </Route>
+        <Route
+          path='/jobs'
+          element={<Jobs/>}
+        />
       </Routes>
     </BrowserRouter>
   )

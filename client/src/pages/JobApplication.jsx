@@ -9,10 +9,12 @@ import { submitApplication } from '../redux/operations/applicationAPI'
 import { toast } from 'react-toastify'
 import { FaWallet } from "react-icons/fa";
 import { BsFillPeopleFill } from "react-icons/bs";
+import { useNavigate } from 'react-router-dom'
 
 const JobApplication = () => {
     const { jobId } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { job, loading } = useSelector((state) => state.job);
     const user = JSON.parse(localStorage.getItem("user"));
     const [resume, setResume] = useState(null);
@@ -70,6 +72,8 @@ const onSubmitHandler = async () => {
 
         setResume(null);
         document.getElementById("resume").value = "";
+
+        navigate("/");
 
     } catch (error) {
         toast.error(

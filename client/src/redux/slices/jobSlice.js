@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getFilteredJobs, getJobById } from "../operations/jobAPI";
+import { getAllJobs, getFilteredJobs, getJobById } from "../operations/jobAPI";
 
 const initialState = {
     jobs: [],
@@ -48,6 +48,18 @@ const jobSlice = createSlice({
                 state.job = action.payload;
             })
             .addCase(getJobById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(getAllJobs.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getAllJobs.fulfilled, (state, action) => {
+                state.loading = false;
+                state.jobs = action.payload.data;
+            })
+            .addCase(getAllJobs.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
